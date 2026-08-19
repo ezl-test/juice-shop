@@ -1,0 +1,23 @@
+stages:
+  - pentest
+
+# Shannon Pentest (prototype)
+# Run manually from CI/CD > Pipelines > "Run pipeline" and set TARGET_URL.
+shannon-pentest:
+  stage: pentest
+  image: node:22
+  timeout: 2h
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web"
+      when: manual
+  variables:
+    WORKSPACE: "ci-${CI_PIPELINE_ID}"
+    # TARGET_URL: set this when running the pipeline (the running target URL to scan)
+  script:
+    - |
+      set -euo pipefail
+      npx --yes @keygraph/shannon@latest start \
+        -u "$TARGET_URL" \
+        -r "$CI_PROJECT_DIR" \
+        -w "$WORKSPACE" \
+        -f
