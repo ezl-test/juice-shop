@@ -1,8 +1,15 @@
+spec:
+  inputs:
+    target_url:
+      type: string
+      description: "Running target URL to scan (must be a deployment you own, e.g. https://staging.example.com)"
+      regex: "^https?://.+"
+---
 stages:
   - pentest
 
 # Shannon Pentest (prototype)
-# Run manually from CI/CD > Pipelines > "Run pipeline" and set TARGET_URL.
+# Run manually from Build > Pipelines > "Run pipeline"; fill in the target_url input.
 shannon-pentest:
   stage: pentest
   image: node:22
@@ -12,10 +19,12 @@ shannon-pentest:
       when: manual
   variables:
     WORKSPACE: "ci-${CI_PIPELINE_ID}"
-    # TARGET_URL: set this when running the pipeline (the running target URL to scan)
+    TARGET_URL: "$[[ inputs.target_url ]]"
+    # SHANNON_AI_API_KEY: masked (Settings > CI/CD > Variables); protected -> run on master
   script:
     - |
       set -euo pipefail
+      : "${SHANNON_AI_API_KEY:?SHANNON_AI_API_KEY is not set (protected variable? run on a protected branch)}"
       npx --yes @keygraph/shannon@latest start \
         -u "$TARGET_URL" \
         -r "$CI_PROJECT_DIR" \
