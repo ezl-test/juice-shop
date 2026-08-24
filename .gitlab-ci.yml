@@ -6,7 +6,7 @@
 # Requires SHANNON_AI_API_KEY as a masked CI/CD variable (Settings > CI/CD > Variables),
 # and a self-managed runner with Docker socket binding - see the component README.
 include:
-  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.0
+  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.1
     inputs:
       url: https://6a47-103-125-154-19.ngrok-free.app
       config: .shannon/js.yaml
