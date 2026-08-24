@@ -1,32 +1,19 @@
-spec:
-  inputs:
-    target_url:
-      type: string
-      description: "Running target URL to scan (must be a deployment you own, e.g. https://staging.example.com)"
-      regex: "^https?://.+"
----
-stages:
-  - pentest
+# Shannon pentest - consumes the published Shannon CI/CD component.
+#
+# Run manually: Build > Pipelines > "Run pipeline" (the target is an ephemeral
+# staging URL, so we don't scan on every push).
+#
+# Requires SHANNON_AI_API_KEY as a masked CI/CD variable (Settings > CI/CD > Variables),
+# and a self-managed runner with Docker socket binding - see the component README.
+include:
+  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.0
+    inputs:
+      url: https://6a47-103-125-154-19.ngrok-free.app
+      config: .shannon/js.yaml
 
-# Shannon Pentest (prototype)
-# Run manually from Build > Pipelines > "Run pipeline"; fill in the target_url input.
-shannon-pentest:
-  stage: pentest
-  image: node:22
+# Re-declare the component's job to run manually and give the scan room to finish.
+shannon-scan:
   timeout: 2h
   rules:
     - if: $CI_PIPELINE_SOURCE == "web"
       when: manual
-  variables:
-    WORKSPACE: "ci-${CI_PIPELINE_ID}"
-    TARGET_URL: "$[[ inputs.target_url ]]"
-    # SHANNON_AI_API_KEY: masked (Settings > CI/CD > Variables); protected -> run on master
-  script:
-    - |
-      set -euo pipefail
-      : "${SHANNON_AI_API_KEY:?SHANNON_AI_API_KEY is not set (protected variable? run on a protected branch)}"
-      npx --yes @keygraph/shannon@latest start \
-        -u "$TARGET_URL" \
-        -r "$CI_PROJECT_DIR" \
-        -w "$WORKSPACE" \
-        -f
