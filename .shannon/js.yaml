@@ -1,0 +1,25 @@
+authentication:
+  login_type: form
+  login_url: "http://host.docker.internal:2468/#/login"
+  credentials:
+    username: "admin@juice-sh.op"
+    password: "admin123"
+
+  login_flow:
+    - "Type $username into the email field"
+    - "Type $password into the password field"
+    - "Click the 'Log in' button"
+
+  success_condition:
+    type: text_contains
+    value: "admin@juice-sh.op"
+
+rules:
+  avoid:
+    - description: "Challenge UI"
+      type: url_path
+      value: "/#/score-board"
+
+    - description: "CTF challenge tracking endpoints"
+      type: url_path
+      value: "/api/Challenges"
