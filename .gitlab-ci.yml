@@ -6,10 +6,11 @@
 # Requires SHANNON_AI_API_KEY as a masked CI/CD variable (Settings > CI/CD > Variables),
 # and a self-managed shell-executor runner (non-root, Docker + Node) tagged "shannon".
 include:
-  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.3
+  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.5
     inputs:
-      url: https://0072-103-125-154-19.ngrok-free.app
+      url: https://0e4e-103-125-154-19.ngrok-free.app
       config: .shannon/js.yaml
+      pipeline-testing: true
 
 # Re-declare the component's job: run manually, route to the shell-executor runner
 # via its "shannon" tag, and give the scan room to finish.
