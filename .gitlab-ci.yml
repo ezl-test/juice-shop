@@ -6,7 +6,7 @@
 # Requires SHANNON_AI_API_KEY as a masked CI/CD variable (Settings > CI/CD > Variables),
 # and a self-managed shell-executor runner (non-root, Docker + Node) tagged "shannon".
 include:
-  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.1
+  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.2
     inputs:
       url: https://juice-shop.invalid
       config: .shannon/js.yaml
