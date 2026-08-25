@@ -8,7 +8,7 @@
 include:
   - component: gitlab.com/naomi-group5355034/shannon-action/scan@1.0.1
     inputs:
-      url: https://6a47-103-125-154-19.ngrok-free.app
+      url: https://0072-103-125-154-19.ngrok-free.app
       config: .shannon/js.yaml
 
 # Re-declare the component's job: run manually, route to the shell-executor runner
