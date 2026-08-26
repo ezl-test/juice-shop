@@ -1,6 +1,6 @@
 authentication:
   login_type: form
-  login_url: "https://0e4e-103-125-154-19.ngrok-free.app/#/login"
+  login_url: "https://qf1esqaymz62oydu1k2vxtyattpj9cvcx7vakwm8local.ezhil.dev/#/login"
   credentials:
     username: "admin@juice-sh.op"
     password: "admin123"
