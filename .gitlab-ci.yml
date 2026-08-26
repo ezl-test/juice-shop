@@ -14,7 +14,7 @@ include:
 # Re-declare the component's job: run manually, route to the shell-executor runner
 # via its "shannon" tag, and give the scan room to finish.
 shannon-scan:
-  timeout: 2h
+  timeout: 4h
   tags:
     - shannon
   rules:
