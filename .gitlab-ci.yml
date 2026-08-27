@@ -6,14 +6,14 @@
 # Requires SHANNON_AI_API_KEY as a masked CI/CD variable (Settings > CI/CD > Variables),
 # and a self-managed shell-executor runner (non-root, Docker + Node) tagged "shannon".
 include:
-  - component: gitlab.com/naomi-group5355034/shannon-action/scan@1
+  - component: gitlab.com/naomi-group5355034/shannon-action/pentest@1
     inputs:
       url: https://qf1esqaymz62oydu1k2vxtyattpj9cvcx7vakwm8local.ezhil.dev
       config: .shannon/js-gitlab.yaml
 
 # Re-declare the component's job: run manually, route to the shell-executor runner
 # via its "shannon" tag, and give the scan room to finish.
-shannon-scan:
+shannon-pentest:
   timeout: 4h
   tags:
     - shannon
