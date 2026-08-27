@@ -10,6 +10,7 @@ include:
     inputs:
       url: https://qf1esqaymz62oydu1k2vxtyattpj9cvcx7vakwm8local.ezhil.dev
       config: .shannon/js-gitlab.yaml
+      upload-sarif: true
 
 # Re-declare the component's job: run manually, route to the shell-executor runner
 # via its "shannon" tag, and give the scan room to finish.
